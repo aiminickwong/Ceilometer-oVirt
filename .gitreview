@@ -1,5 +1,5 @@
 [gerrit]
-host=review.openstack.org
+host=gerrit.bcec
 port=29418
-project=openstack/ceilometer.git
+project=bcec/ceilometer.git
 defaultbranch=stable/icehouse
