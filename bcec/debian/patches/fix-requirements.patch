@@ -1,0 +1,26 @@
+Description: Disable pynsmp and set min version of pecan/six.
+Author: Corey Bryant <corey.bryant@canonical.com>
+Forwarded: Not needed.
+Index: ceilometer/requirements.txt
+===================================================================
+--- ceilometer.orig/requirements.txt	2014-06-13 10:13:20.380556854 -0400
++++ ceilometer/requirements.txt	2014-06-13 10:42:20.980503789 -0400
+@@ -16,8 +16,7 @@
+ oslo.config>=1.2.0
+ oslo.vmware>=0.2                        # Apache-2.0
+ pbr>=0.6,<1.0
+-pecan>=0.4.5
+-pysnmp>=4.2.1,<5.0.0
++pecan>=0.3.0
+ python-ceilometerclient>=1.0.6
+ python-glanceclient>=0.9.0
+ python-keystoneclient>=0.7.0
+@@ -26,7 +25,7 @@
+ pytz>=2010h
+ PyYAML>=3.1.0
+ requests>=1.1
+-six>=1.6.0
++six>=1.5.2
+ SQLAlchemy>=0.7.8,<=0.9.99
+ sqlalchemy-migrate>=0.8.2,!=0.8.4
+ stevedore>=0.14
