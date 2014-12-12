@@ -79,10 +79,10 @@ Requires:         python-netaddr
 Requires:         python-pbr
 Requires:         python-requests
 
-Requires:         python-sqlalchemy >= 0.7.8, python-sqlalchemy < 0.9.5, python-sqlalchemy > 0.9.5, python-sqlalchemy <= 0.9.99
+Requires:         python-sqlalchemy >= 0.7.8
 Requires:         python-alembic
-Requires:         python-migrate >= 0.8.2, python-migrate < 0.8.4, python-migrate > 0.8.4
-Requires:         python-happybase >= 0.5, python-happybase < 0.7, python-happybase > 0.7
+Requires:         python-migrate >= 0.8.2
+Requires:         python-happybase >= 0.5
 
 Requires:         python-webob >= 1.2.3
 
