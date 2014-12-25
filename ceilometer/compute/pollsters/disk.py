@@ -463,3 +463,40 @@ class PerDeviceWriteRequestsRatePollster(_DiskRatesPollsterBase):
                 resource_id="%s-%s" % (instance.id, disk),
             ))
         return samples
+
+
+class DiskUsagePollster(plugin.ComputePollster):
+
+    def get_samples(self, manager, cache, resources):
+        for instance in resources:
+            LOG.debug(_('Checking disk usage for instance %s'), instance.id)
+            try:
+                instance_name = util.instance_name(instance)
+                disk_usage_list = manager.oga_inspector.inspect_disk_usage(
+                        instance_name)
+
+                if disk_usage_list is None:
+                    continue
+
+                for disk_usage in disk_usage_list:
+                    yield (util.make_sample_from_instance(
+                        instance,
+                        name='disk.usage',
+                        type=sample.TYPE_GAUGE,
+                        unit='%',
+                        volume=disk_usage.usage,
+                        resource_id="%s-%s" % (instance.id, disk_usage.mount_point),
+                    ))
+
+            except virt_inspector.InstanceNotFoundException as err:
+                # Instance was deleted while getting samples. Ignore it.
+                LOG.debug(_('Exception while getting samples %s'), err)
+            except ceilometer.NotImplementedError:
+                # Selected inspector does not implement this pollster.
+                LOG.debug(_('%(inspector)s does not provide data for '
+                            ' %(pollster)s'),
+                          {'inspector': manager.inspector.__class__.__name__,
+                           'pollster': self.__class__.__name__})
+            except Exception as err:
+                LOG.exception(_('Ignoring instance %(name)s: %(error)s'),
+                              {'name': instance_name, 'error': err})
