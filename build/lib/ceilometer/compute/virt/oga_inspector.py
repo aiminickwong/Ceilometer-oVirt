@@ -199,7 +199,7 @@ class OGAInspector(object):
         """
         agt = self._get_agent(instance_name)
         if agt is None:
-            return -1
+            return None
         guestInfo = agt.getGuestInfo()
         if (guestInfo is not None and
             guestInfo.get("disksUsage") is not None):
@@ -216,10 +216,23 @@ class OGAInspector(object):
                                        usage=usage)
                 usage_list.append(disk_usage)
 
-            return disk_usage
+            return usage_list
 
         else:
             return None
+
+
+def get_oga_inspector():
+    try:
+        namespace = 'ceilometer.compute.virt'
+        mgr = driver.DriverManager(namespace,
+                                   "oga_inspector",
+                                   invoke_on_load=True)
+        return mgr.driver
+    except ImportError as e:
+        LOG.error(_("Unable to load the Ovirt Geuest Agent inspector: %s") % e)
+        return None
+
 
 if __name__ == '__main__':
     inspector = OGAInspector()

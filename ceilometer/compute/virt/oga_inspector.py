@@ -15,7 +15,7 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 import collections
-
+#from eventlet import greenthread
 from oslo.config import cfg
 from stevedore import driver
 
@@ -29,7 +29,7 @@ from time import strftime
 from time import sleep
 from ovirtga.guestagent import GuestAgent
 from ovirtga.vmchannels import Listener
-
+from eventlet import tpool
 LOG = log.getLogger(__name__)
 
 _VMCHANNEL_DEVICE_NAME = 'com.redhat.rhevm.vdsm'
@@ -55,6 +55,7 @@ class OGAInspector(object):
         self.oga_dict = {}
         self.channelListener = Listener()
         self.channelListener.settimeout(30)
+        #greenthread.spawn_n(self.channelListener.run())
         self.channelListener.start()
 
     def _get_agent(self, instance_name):
@@ -220,6 +221,19 @@ class OGAInspector(object):
 
         else:
             return None
+
+
+def get_oga_inspector():
+    try:
+        namespace = 'ceilometer.compute.virt'
+        mgr = driver.DriverManager(namespace,
+                                   "oga_inspector",
+                                   invoke_on_load=True)
+        return mgr.driver
+    except ImportError as e:
+        LOG.error(_("Unable to load the Ovirt Geuest Agent inspector: %s") % e)
+        return None
+
 
 if __name__ == '__main__':
     inspector = OGAInspector()

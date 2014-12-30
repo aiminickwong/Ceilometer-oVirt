@@ -469,11 +469,11 @@ class DiskUsagePollster(plugin.ComputePollster):
 
     def get_samples(self, manager, cache, resources):
         for instance in resources:
-            LOG.debug(_('Checking memory usage for instance %s'), instance.id)
+            LOG.debug(_('Checking disk usage for instance %s'), instance.id)
             try:
                 instance_name = util.instance_name(instance)
-                disk_usage_list = manager.inspector.inspect_disk_usage(
-                        instance, self._inspection_duration)
+                disk_usage_list = manager.oga_inspector.inspect_disk_usage(
+                        instance_name)
 
                 if disk_usage_list is None:
                     continue
