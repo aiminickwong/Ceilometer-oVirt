@@ -427,7 +427,7 @@ class Connection(base.Connection):
                      .filter(models.Resource.resource_id == res_id[0]))
             max_q = make_query_from_filter(session, max_q, s_filter,
                                            require_meter=False)
-            max_q = max_q.order_by(models.Sample.timestamp.desc(),
+            max_q = max_q.order_by(models.Sample.timelstamp.desc(),
                                    models.Sample.id.desc()).limit(1)
 
             # get the min timestamp value.

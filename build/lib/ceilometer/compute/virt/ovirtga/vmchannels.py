@@ -23,6 +23,8 @@ import time
 import select
 import errno
 from ceilometer.openstack.common import log
+from eventlet import greenthread
+
 
 LOG = log.getLogger(__name__)
 
@@ -55,6 +57,10 @@ def NoIntrPoll(pollfun, timeout=-1):
 
         if endtime is not None:
             timeout = max(0, endtime - time.time())
+
+        # Note(luogangyi): Since native thread is replaced by eventlet,
+        # we must add sleep here to switch green thread manually.
+        greenthread.sleep(1)
 
 
 class Listener(threading.Thread):
@@ -206,6 +212,9 @@ class Listener(threading.Thread):
         try:
             while not self._quit:
                 self._wait_for_events()
+                # Note(luogangyi): Since native thread is replaced by eventlet,
+                # we must add sleep here to switch green thread manually.
+                greenthread.sleep(1)
         except:
             LOG.exception("Unhandled exception caught in vm channels "
                                "listener thread")

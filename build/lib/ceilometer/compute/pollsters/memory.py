@@ -59,7 +59,7 @@ class MemoryTotalPollster(plugin.ComputePollster):
 
     def get_samples(self, manager, cache, resources):
         for instance in resources:
-            LOG.debug(_('Checking memory total for instance %s'), instance.id)
+            LOG.debug(_('Checking memory total and system info for instance %s'), instance.id)
             try:
                 instance_name = util.instance_name(instance)
                 memory_total_kb = int(manager.oga_inspector.inspect_mem_total(

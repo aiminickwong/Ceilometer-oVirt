@@ -16,9 +16,15 @@
 
 from ceilometer.api import app
 from ceilometer import service
+import sys
 
 
 def main():
     service.prepare_service()
     srv = app.build_server()
     srv.serve_forever()
+
+
+if __name__ == '__main__':
+    sys.exit(main())
+

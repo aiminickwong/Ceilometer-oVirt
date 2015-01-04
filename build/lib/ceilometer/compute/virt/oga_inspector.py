@@ -15,7 +15,7 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 import collections
-
+#from eventlet import greenthread
 from oslo.config import cfg
 from stevedore import driver
 
@@ -29,7 +29,7 @@ from time import strftime
 from time import sleep
 from ovirtga.guestagent import GuestAgent
 from ovirtga.vmchannels import Listener
-
+from eventlet import tpool
 LOG = log.getLogger(__name__)
 
 _VMCHANNEL_DEVICE_NAME = 'com.redhat.rhevm.vdsm'
@@ -87,7 +87,23 @@ class OGAInspector(object):
             if(agt.getGuestInfo().get("memoryStats") is not None and
                 agt.getGuestInfo().get("memoryStats").get("mem_total")):
                 print agt.getGuestInfo()["memoryStats"]["mem_total"]
+            self.inspect_sys(instance_name)
             sleep(1)
+
+    def inspect_sys(self, instance_name):
+        """Inspect the system information for an instance.
+
+        :param instance_name: the name of the target instance
+        :return: the dict of system information
+        """
+        agt = self._get_agent(instance_name)
+        sys_dict = {}
+        for attr in ["netIfaces", "guestFQDN", "lastLogin", "guestOs", "guestIPs"]:
+            val = agt.getGuestInfo().get(attr)
+            if val is not None and val != '':
+                sys_dict[attr] = val
+                print attr, val
+        return sys_dict
 
     def inspect_mem_total(self, instance_name):
         """Inspect the Total Memory for an instance.
@@ -236,5 +252,5 @@ def get_oga_inspector():
 
 if __name__ == '__main__':
     inspector = OGAInspector()
-    inspector.inspect_mem("instance-00000002")
+    inspector.inspect_mem("instance-00000005")
 
