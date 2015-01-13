@@ -30,6 +30,7 @@ import stat
 
 import vmstatus
 from ceilometer.openstack.common import log
+from ceilometer import utils
 
 LOG = log.getLogger(__name__)
 
@@ -196,9 +197,10 @@ class GuestAgent(object):
                 self._forward('api-version', {'apiVersion': commonVersion})
 
     def _prepare_socket(self):
-        mode = os.stat(self._socketName).st_mode | stat.S_IWGRP
-        os.chmod(self._socketName, mode)
-        #supervdsm.getProxy().prepareVmChannel(self._socketName)
+        chmod_dir_cmd = ['chmod', '-R', 'o+x', self._socketName]
+        utils.execute(*chmod_dir_cmd, run_as_root=True)
+        chmod_file_cmd = ['chmod', 'o+rw', self._socketName]
+        utils.execute(*chmod_file_cmd, run_as_root=True)
 
     @staticmethod
     def _create(self):

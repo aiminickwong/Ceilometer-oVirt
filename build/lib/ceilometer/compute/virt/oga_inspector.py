@@ -15,21 +15,17 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 import collections
-#from eventlet import greenthread
-from oslo.config import cfg
 from stevedore import driver
 
-import ceilometer
 from ceilometer.openstack.common.gettextutils import _
 from ceilometer.openstack.common import log
 
-import logging
+
 import os
-from time import strftime
+
 from time import sleep
 from ovirtga.guestagent import GuestAgent
 from ovirtga.vmchannels import Listener
-from eventlet import tpool
 LOG = log.getLogger(__name__)
 
 _VMCHANNEL_DEVICE_NAME = 'com.redhat.rhevm.vdsm'
@@ -227,7 +223,8 @@ class OGAInspector(object):
                 total = per_disk["total"]
                 path = per_disk["path"]
                 usage = float(used)/float(total)
-                usage = round(usage, 2)
+                usage = round(usage, 3)
+                usage = usage * 100
                 disk_usage = DiskUsage(mount_point=path,
                                        usage=usage)
                 usage_list.append(disk_usage)

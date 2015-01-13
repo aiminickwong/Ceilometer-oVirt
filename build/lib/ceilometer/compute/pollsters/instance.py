@@ -69,4 +69,5 @@ class InstanceSystemInfoPollster(plugin.ComputePollster):
                 unit='instance',
                 volume=1,
                 additional_metadata=sys_info,
+                resource_id="%s-%s" % (instance.id, 'sys-info'),
             )
