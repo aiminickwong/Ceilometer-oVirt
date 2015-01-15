@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="d584afc6-073e-4591-9f4b-82cb259522a6" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ceilometer/compute/virt/ovirtga/guestagent.py" afterPath="$PROJECT_DIR$/ceilometer/compute/virt/ovirtga/guestagent.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ceilometer/compute/virt/oga_inspector.py" afterPath="$PROJECT_DIR$/ceilometer/compute/virt/oga_inspector.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="ceilometer.iws" />
@@ -26,11 +27,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="oga_inspector.py" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ceilometer/compute/virt/oga_inspector.py">
+      <file leaf-file-name="agent.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ceilometer/agent.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="504" max-vertical-offset="4464">
-              <caret line="251" column="44" selection-start-line="251" selection-start-column="28" selection-end-line="251" selection-end-column="44" />
+            <state vertical-scroll-proportion="-13.862069" vertical-offset="2964" max-vertical-offset="4248">
+              <caret line="201" column="21" selection-start-line="201" selection-start-column="21" selection-end-line="201" selection-end-column="21" />
               <folding />
             </state>
           </provider>
@@ -39,7 +40,7 @@
       <file leaf-file-name="vmstatus.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ceilometer/compute/virt/ovirtga/vmstatus.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="216" max-vertical-offset="666">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="666">
               <caret line="16" column="1" selection-start-line="16" selection-start-column="1" selection-end-line="16" selection-end-column="1" />
               <folding />
             </state>
@@ -49,7 +50,7 @@
       <file leaf-file-name="vmchannels.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ceilometer/compute/virt/ovirtga/vmchannels.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-7.6551723" vertical-offset="1668" max-vertical-offset="4554">
+            <state vertical-scroll-proportion="0.0" vertical-offset="702" max-vertical-offset="4554">
               <caret line="110" column="16" selection-start-line="110" selection-start-column="9" selection-end-line="110" selection-end-column="16" />
               <folding />
             </state>
@@ -59,7 +60,7 @@
       <file leaf-file-name="utils.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ceilometer/utils.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="162" max-vertical-offset="4338">
+            <state vertical-scroll-proportion="0.0" vertical-offset="738" max-vertical-offset="4572">
               <caret line="41" column="0" selection-start-line="41" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
               <folding />
             </state>
@@ -79,8 +80,8 @@
       <file leaf-file-name="guestagent.py" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ceilometer/compute/virt/ovirtga/guestagent.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.3502994" vertical-offset="3330" max-vertical-offset="8874">
-              <caret line="198" column="30" selection-start-line="198" selection-start-column="30" selection-end-line="198" selection-end-column="30" />
+            <state vertical-scroll-proportion="0.33233532" vertical-offset="8058" max-vertical-offset="8964">
+              <caret line="460" column="32" selection-start-line="460" selection-start-column="28" selection-end-line="460" selection-end-column="32" />
               <folding>
                 <element signature="e#846#857#0" expanded="true" />
               </folding>
@@ -91,7 +92,7 @@
       <file leaf-file-name="setup.cfg" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/setup.cfg">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-37.931034" vertical-offset="4696" max-vertical-offset="5958">
+            <state vertical-scroll-proportion="0.0" vertical-offset="4696" max-vertical-offset="5958">
               <caret line="322" column="19" selection-start-line="322" selection-start-column="19" selection-end-line="322" selection-end-column="19" />
               <folding />
             </state>
@@ -111,19 +112,21 @@
       <file leaf-file-name="requirements.txt" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/requirements.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="630" max-vertical-offset="954">
+            <state vertical-scroll-proportion="0.0" vertical-offset="257" max-vertical-offset="954">
               <caret line="35" column="0" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="25" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="LICENSE" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/LICENSE">
+      <file leaf-file-name="oga_inspector.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ceilometer/compute/virt/oga_inspector.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3276">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
+            <state vertical-scroll-proportion="0.0" vertical-offset="756" max-vertical-offset="4734">
+              <caret line="76" column="0" selection-start-line="76" selection-start-column="0" selection-end-line="76" selection-end-column="0" />
+              <folding>
+                <element signature="e#639#657#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -152,8 +155,8 @@
         <option value="$PROJECT_DIR$/ceilometer/compute/pollsters/instance.py" />
         <option value="$PROJECT_DIR$/ceilometer/storage/impl_sqlalchemy.py" />
         <option value="$PROJECT_DIR$/ceilometer/compute/virt/ovirtga/vmchannels.py" />
-        <option value="$PROJECT_DIR$/ceilometer/compute/virt/oga_inspector.py" />
         <option value="$PROJECT_DIR$/ceilometer/compute/pollsters/memory.py" />
+        <option value="$PROJECT_DIR$/ceilometer/compute/virt/oga_inspector.py" />
         <option value="$PROJECT_DIR$/ceilometer/compute/virt/ovirtga/guestagent.py" />
       </list>
     </option>
@@ -189,7 +192,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -434,6 +436,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -740,27 +743,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file:///usr/lib/python2.6/site-packages/stevedore/driver.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="660" max-vertical-offset="2484">
-          <caret line="44" column="0" selection-start-line="44" selection-start-column="0" selection-end-line="44" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ceilometer/openstack/common/service.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="8819" max-vertical-offset="9216">
-          <caret line="504" column="0" selection-start-line="504" selection-start-column="0" selection-end-line="504" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///usr/lib/python2.6/site-packages/stevedore/extension.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="3054" max-vertical-offset="5040">
-          <caret line="179" column="0" selection-start-line="179" selection-start-column="0" selection-end-line="179" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ceilometer/compute/manager.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="395" max-vertical-offset="792">
@@ -772,7 +754,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="1200" max-vertical-offset="1800">
           <caret line="75" column="0" selection-start-line="75" selection-start-column="0" selection-end-line="75" selection-end-column="7" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1028,53 +1009,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="4068" max-vertical-offset="4518">
           <caret line="210" column="26" selection-start-line="210" selection-start-column="6" selection-end-line="210" selection-end-column="26" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/requirements.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="954">
-          <caret line="35" column="0" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="25" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/LICENSE">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3276">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ceilometer/compute/virt/ovirtga/vmstatus.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="666">
-          <caret line="16" column="1" selection-start-line="16" selection-start-column="1" selection-end-line="16" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ceilometer/compute/virt/inspector.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="3708" max-vertical-offset="4158">
-          <caret line="232" column="0" selection-start-line="232" selection-start-column="0" selection-end-line="232" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/setup.cfg">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-37.931034" vertical-offset="4696" max-vertical-offset="5958">
-          <caret line="322" column="19" selection-start-line="322" selection-start-column="19" selection-end-line="322" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/etc/ceilometer/rootwrap.conf">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="697">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
@@ -1088,26 +1028,92 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ceilometer/compute/virt/oga_inspector.py">
+    <entry file="file://$PROJECT_DIR$/setup.cfg">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1836" max-vertical-offset="4662">
-          <caret line="251" column="44" selection-start-line="251" selection-start-column="28" selection-end-line="251" selection-end-column="44" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="4696" max-vertical-offset="5958">
+          <caret line="322" column="19" selection-start-line="322" selection-start-column="19" selection-end-line="322" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/etc/ceilometer/rootwrap.conf">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="697">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/requirements.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="954">
+          <caret line="35" column="0" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/.PyCharm30/system/python_stubs/348993582/time.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="5256">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ceilometer/pipeline.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33233532" vertical-offset="7302" max-vertical-offset="9396">
+          <caret line="429" column="50" selection-start-line="429" selection-start-column="46" selection-end-line="429" selection-end-column="50" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ceilometer/compute/virt/inspector.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="3708" max-vertical-offset="4158">
+          <caret line="232" column="0" selection-start-line="232" selection-start-column="0" selection-end-line="232" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ceilometer/compute/virt/ovirtga/vmstatus.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="666">
+          <caret line="16" column="1" selection-start-line="16" selection-start-column="1" selection-end-line="16" selection-end-column="1" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/ceilometer/compute/virt/ovirtga/vmchannels.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-7.6551723" vertical-offset="1668" max-vertical-offset="4554">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1980" max-vertical-offset="4644">
           <caret line="110" column="16" selection-start-line="110" selection-start-column="9" selection-end-line="110" selection-end-column="16" />
           <folding />
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/ceilometer/agent.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-13.862069" vertical-offset="2964" max-vertical-offset="4248">
+          <caret line="201" column="21" selection-start-line="201" selection-start-column="21" selection-end-line="201" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ceilometer/compute/virt/oga_inspector.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="756" max-vertical-offset="4734">
+          <caret line="76" column="0" selection-start-line="76" selection-start-column="0" selection-end-line="76" selection-end-column="0" />
+          <folding>
+            <element signature="e#639#657#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/ceilometer/compute/virt/ovirtga/guestagent.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3502994" vertical-offset="3330" max-vertical-offset="8874">
-          <caret line="198" column="30" selection-start-line="198" selection-start-column="30" selection-end-line="198" selection-end-column="30" />
+        <state vertical-scroll-proportion="0.33233532" vertical-offset="8058" max-vertical-offset="8964">
+          <caret line="460" column="32" selection-start-line="460" selection-start-column="28" selection-end-line="460" selection-end-column="32" />
           <folding>
             <element signature="e#846#857#0" expanded="true" />
           </folding>

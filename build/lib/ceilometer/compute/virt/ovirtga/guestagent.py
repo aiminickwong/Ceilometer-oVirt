@@ -30,6 +30,7 @@ import stat
 
 import vmstatus
 from ceilometer.openstack.common import log
+from ceilometer import utils
 
 LOG = log.getLogger(__name__)
 
@@ -134,7 +135,7 @@ class GuestAgent(object):
             'disksUsage': [],
             'netIfaces': [],
             'memoryStats': {}}
-        self._agentTimestamp = 0
+        self._agentTimestamp = time.time()
         self._channelListener = channelListener
         self._messageState = MessageState.NORMAL
 
@@ -196,9 +197,10 @@ class GuestAgent(object):
                 self._forward('api-version', {'apiVersion': commonVersion})
 
     def _prepare_socket(self):
-        mode = os.stat(self._socketName).st_mode | stat.S_IWGRP
-        os.chmod(self._socketName, mode)
-        #supervdsm.getProxy().prepareVmChannel(self._socketName)
+        chmod_dir_cmd = ['chmod', '-R', 'o+x', self._socketName]
+        utils.execute(*chmod_dir_cmd, run_as_root=True)
+        chmod_file_cmd = ['chmod', 'o+rw', self._socketName]
+        utils.execute(*chmod_file_cmd, run_as_root=True)
 
     @staticmethod
     def _create(self):
@@ -224,6 +226,7 @@ class GuestAgent(object):
                               {'apiVersion': _MAX_SUPPORTED_API_VERSION})
                 self._stopped = False
                 ret = True
+                self._agentTimestamp = time.time()
             else:
                 LOG.debug("Failed to connect to %s with %d",
                                self._socketName, result)
@@ -483,3 +486,7 @@ class GuestAgent(object):
         name = args['__name__']
         del args['__name__']
         return (name, args)
+
+    def update_time(self):
+        ''':return the last interactive time'''
+        return self._agentTimestamp

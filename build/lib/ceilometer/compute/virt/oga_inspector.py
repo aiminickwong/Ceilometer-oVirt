@@ -20,7 +20,7 @@ from stevedore import driver
 from ceilometer.openstack.common.gettextutils import _
 from ceilometer.openstack.common import log
 
-
+import time
 import os
 
 from time import sleep
@@ -43,8 +43,9 @@ DiskUsage = collections.namedtuple('DiskUsage',
                                    ['mount_point', 'usage'])
 
 
-
 class OGAInspector(object):
+
+    INSPECTOR_TIMEOUT = 120
 
     def __init__(self):
 
@@ -56,6 +57,9 @@ class OGAInspector(object):
     def _get_agent(self, instance_name):
 
         if self.oga_dict.has_key(instance_name):
+            guest_agent = self.oga_dict[instance_name]
+            if time.time() - guest_agent.update_time() > self.INSPECTOR_TIMEOUT:
+                guest_agent.connect()
             return self.oga_dict[instance_name]
 
         guestSocketFile = self._make_channel_path(_VMCHANNEL_DEVICE_NAME, instance_name)

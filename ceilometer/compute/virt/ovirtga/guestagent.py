@@ -135,7 +135,7 @@ class GuestAgent(object):
             'disksUsage': [],
             'netIfaces': [],
             'memoryStats': {}}
-        self._agentTimestamp = 0
+        self._agentTimestamp = time.time()
         self._channelListener = channelListener
         self._messageState = MessageState.NORMAL
 
@@ -226,6 +226,7 @@ class GuestAgent(object):
                               {'apiVersion': _MAX_SUPPORTED_API_VERSION})
                 self._stopped = False
                 ret = True
+                self._agentTimestamp = time.time()
             else:
                 LOG.debug("Failed to connect to %s with %d",
                                self._socketName, result)
@@ -485,3 +486,7 @@ class GuestAgent(object):
         name = args['__name__']
         del args['__name__']
         return (name, args)
+
+    def update_time(self):
+        ''':return the last interactive time'''
+        return self._agentTimestamp
