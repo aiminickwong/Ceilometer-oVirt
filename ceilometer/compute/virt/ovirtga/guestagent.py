@@ -197,8 +197,6 @@ class GuestAgent(object):
                 self._forward('api-version', {'apiVersion': commonVersion})
 
     def _prepare_socket(self):
-        chmod_dir_cmd = ['chmod', '-R', 'o+x', self._socketName]
-        utils.execute(*chmod_dir_cmd, run_as_root=True)
         chmod_file_cmd = ['chmod', 'o+rw', self._socketName]
         utils.execute(*chmod_file_cmd, run_as_root=True)
 
