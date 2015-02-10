@@ -26,6 +26,7 @@ import os
 from time import sleep
 from ovirtga.guestagent import GuestAgent
 from ovirtga.vmchannels import Listener
+#from ovirtga.vmgreenchannels import Listener
 LOG = log.getLogger(__name__)
 
 _VMCHANNEL_DEVICE_NAME = 'com.redhat.rhevm.vdsm'
@@ -48,37 +49,49 @@ class OGAInspector(object):
     INSPECTOR_TIMEOUT = 120
 
     def __init__(self):
-
         self.oga_dict = {}
         self.channelListener = Listener()
         self.channelListener.settimeout(30)
         self.channelListener.start()
-        self._prepare_socket_dir()
+        #self._prepare_socket_dir()
 
     def _get_agent(self, instance_name):
 
-        if self.oga_dict.has_key(instance_name):
-            guest_agent = self.oga_dict[instance_name]
-            if time.time() - guest_agent.update_time() > self.INSPECTOR_TIMEOUT:
-                guest_agent.connect()
+        if instance_name in self.oga_dict:
             return self.oga_dict[instance_name]
 
-        guestSocketFile = self._make_channel_path(_VMCHANNEL_DEVICE_NAME, instance_name)
+        guestSocketFile = self._make_channel_path(_VMCHANNEL_DEVICE_NAME,
+                                                  instance_name)
         if os.path.exists(guestSocketFile):
             guest_agent = GuestAgent(guestSocketFile, self.channelListener)
             guest_agent.connect()
             self.oga_dict[instance_name] = guest_agent
             return guest_agent
         else:
-            LOG.error("Instance %s socket file %s does not exist!" % (instance_name, guestSocketFile))
+            LOG.error("Instance %s socket file %s does not exist!" %
+                      (instance_name, guestSocketFile))
             return None
+
+    def clear_outdated_agent(self):
+
+        del_keys = []
+        for instance_name in self.oga_dict:
+            guest_agent = self.oga_dict[instance_name]
+            if (time.time() - guest_agent.update_time()
+                    > self.INSPECTOR_TIMEOUT):
+                guest_agent.stop()
+                del_keys.append(instance_name)
+
+        for key in del_keys:
+            del self.oga_dict[key]
 
     def _prepare_socket_dir(self):
         chmod_dir_cmd = ['chmod', '-R', 'o+x', _QEMU_GA_DEVICE_DIR]
         utils.execute(*chmod_dir_cmd, run_as_root=True)
 
     def _make_channel_path(self, deviceName, instance_name):
-        return "/var/lib/libvirt/qemu/%s.%s.sock" % (deviceName, instance_name)
+        return "/var/lib/libvirt/qemu/%s.%s.sock" % (deviceName,
+                                                     instance_name)
 
     def inspect_mem(self, instance_name):
         """Inspect the CPU statistics for an instance.
@@ -102,8 +115,11 @@ class OGAInspector(object):
         :return: the dict of system information
         """
         agt = self._get_agent(instance_name)
+        if agt is None:
+            return None
         sys_dict = {}
-        for attr in ["netIfaces", "guestFQDN", "lastLogin", "guestOs", "guestIPs"]:
+        for attr in ["netIfaces", "guestFQDN", "lastLogin",
+                     "guestOs", "guestIPs"]:
             val = agt.getGuestInfo().get(attr)
             if val is not None and val != '':
                 sys_dict[attr] = val
@@ -252,7 +268,8 @@ def get_oga_inspector():
                                    invoke_on_load=True)
         return mgr.driver
     except ImportError as e:
-        LOG.error(_("Unable to load the Ovirt Geuest Agent inspector: %s") % e)
+        LOG.error(_("Unable to load the "
+                    "Ovirt Geuest Agent inspector: %s") % e)
         return None
 
 

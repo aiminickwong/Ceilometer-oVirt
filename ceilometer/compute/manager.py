@@ -29,6 +29,7 @@ class AgentManager(agent.AgentManager):
         super(AgentManager, self).__init__('compute', ['local_instances'])
         self._inspector = virt_inspector.get_hypervisor_inspector()
         self._oga_inspector = oga_inspector.get_oga_inspector()
+        self.tg.add_timer(60, self._oga_inspector.clear_outdated_agent)
 
     @property
     def inspector(self):
