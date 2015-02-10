@@ -19,7 +19,7 @@ from stevedore import driver
 
 from ceilometer.openstack.common.gettextutils import _
 from ceilometer.openstack.common import log
-
+from ceilometer import utils
 import time
 import os
 
@@ -32,7 +32,7 @@ _VMCHANNEL_DEVICE_NAME = 'com.redhat.rhevm.vdsm'
 # This device name is used as default both in the qemu-guest-agent
 # service/daemon and in libvirtd (to be used with the quiesce flag).
 _QEMU_GA_DEVICE_NAME = 'org.qemu.guest_agent.0'
-
+_QEMU_GA_DEVICE_DIR = '/var/lib/libvirt/qemu/'
 
 # Named tuple representing disk usage.
 #
@@ -53,6 +53,7 @@ class OGAInspector(object):
         self.channelListener = Listener()
         self.channelListener.settimeout(30)
         self.channelListener.start()
+        self._prepare_socket_dir()
 
     def _get_agent(self, instance_name):
 
@@ -71,6 +72,10 @@ class OGAInspector(object):
         else:
             LOG.error("Instance %s socket file %s does not exist!" % (instance_name, guestSocketFile))
             return None
+
+    def _prepare_socket_dir(self):
+        chmod_dir_cmd = ['chmod', '-R', 'o+x', _QEMU_GA_DEVICE_DIR]
+        utils.execute(*chmod_dir_cmd, run_as_root=True)
 
     def _make_channel_path(self, deviceName, instance_name):
         return "/var/lib/libvirt/qemu/%s.%s.sock" % (deviceName, instance_name)
