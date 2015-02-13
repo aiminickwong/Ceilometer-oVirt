@@ -51,3 +51,25 @@ class InstanceFlavorPollster(plugin.ComputePollster):
                 unit='instance',
                 volume=1,
             )
+
+
+class InstanceSystemInfoPollster(plugin.ComputePollster):
+
+    @staticmethod
+    def get_samples(manager, cache, resources):
+        for instance in resources:
+
+            instance_name = util.instance_name(instance)
+            sys_info = manager.oga_inspector.inspect_sys(instance_name)
+            if sys_info is None:
+                continue
+
+            yield util.make_sample_from_instance(
+                instance,
+                name='instance.system.info',
+                type=sample.TYPE_GAUGE,
+                unit='instance',
+                volume=1,
+                additional_metadata=sys_info,
+                resource_id="%s-%s" % (instance.id, 'sys-info'),
+            )

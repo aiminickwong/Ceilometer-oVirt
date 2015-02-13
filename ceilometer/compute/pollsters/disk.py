@@ -261,3 +261,33 @@ class WriteRequestsRatePollster(_DiskRatesPollsterBase):
             unit='requests/s',
             volume=disk_rates_info.write_requests_rate,
         )
+
+class DiskUsagePollster(plugin.ComputePollster):
+
+    def get_samples(self, manager, cache, resources):
+        for instance in resources:
+            LOG.debug(_('Checking disk usage for instance %s'), instance.id)
+            try:
+                instance_name = util.instance_name(instance)
+                disk_usage_list = manager.oga_inspector.inspect_disk_usage(
+                        instance_name)
+
+                if disk_usage_list is None:
+                    continue
+
+                for disk_usage in disk_usage_list:
+                    yield (util.make_sample_from_instance(
+                        instance,
+                        name='disk.usage',
+                        type=sample.TYPE_GAUGE,
+                        unit='%',
+                        volume=disk_usage.usage,
+                        resource_id="%s-%s" % (instance.id, disk_usage.mount_point),
+                    ))
+
+            except virt_inspector.InstanceNotFoundException as err:
+                # Instance was deleted while getting samples. Ignore it.
+                LOG.debug(_('Exception while getting samples %s'), err)
+            except Exception as err:
+                LOG.exception(_('Ignoring instance %(name)s: %(error)s'),
+                              {'name': instance_name, 'error': err})

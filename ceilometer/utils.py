@@ -26,6 +26,28 @@ import multiprocessing
 
 from ceilometer.openstack.common import timeutils
 from ceilometer.openstack.common import units
+from ceilometer.openstack.common import processutils
+
+from oslo.config import cfg
+
+utils_opts = [
+    cfg.StrOpt('rootwrap_config',
+               default="/etc/ceilometer/rootwrap.conf",
+               help='Path to the rootwrap configuration file to use for '
+                    'running commands as root'),
+]
+CONF = cfg.CONF
+CONF.register_opts(utils_opts)
+
+def _get_root_helper():
+    return 'sudo nova-rootwrap %s' % CONF.rootwrap_config
+
+
+def execute(*cmd, **kwargs):
+    """Convenience wrapper around oslo's execute() method."""
+    if 'run_as_root' in kwargs and not 'root_helper' in kwargs:
+        kwargs['root_helper'] = _get_root_helper()
+    return processutils.execute(*cmd, **kwargs)
 
 
 def recursive_keypairs(d, separator=':'):

@@ -18,6 +18,7 @@
 
 from ceilometer import agent
 from ceilometer.compute.virt import inspector as virt_inspector
+from ceilometer.compute.virt import oga_inspector
 from ceilometer.openstack.common import log
 
 LOG = log.getLogger(__name__)
@@ -28,7 +29,14 @@ class AgentManager(agent.AgentManager):
     def __init__(self):
         super(AgentManager, self).__init__('compute', ['local_instances'])
         self._inspector = virt_inspector.get_hypervisor_inspector()
+        self._oga_inspector = oga_inspector.get_oga_inspector()
+        LOG.debug("luogangyi")
+        self.tg.add_timer(60, self._oga_inspector.clear_outdated_agent)
 
     @property
     def inspector(self):
         return self._inspector
+
+    @property
+    def oga_inspector(self):
+        return self._oga_inspector
