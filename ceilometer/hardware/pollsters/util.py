@@ -27,7 +27,8 @@ from ceilometer import sample
 
 
 def get_metadata_from_host(host_url):
-    return {'resource_url': urlparse.urlunsplit(host_url)}
+    return {'resource_url': urlparse.urlunsplit(host_url),
+            'hostname': host_url.hostname}
 
 
 def make_resource_metadata(res_metadata=None, host_url=None):

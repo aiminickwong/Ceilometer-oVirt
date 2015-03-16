@@ -43,6 +43,7 @@ def _get_metadata_from_object(instance):
         'host': instance.hostId,
         'flavor': instance.flavor,
         'status': instance.status.lower(),
+        'instance_uuid': instance.id,
     }
 
     # Image properties

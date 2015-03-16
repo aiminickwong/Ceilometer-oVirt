@@ -4,7 +4,9 @@
 import sys
 
 #from ceilometer.cmd.agent_compute import main
-from ceilometer.cmd.agent_notification import main
+#from ceilometer.cmd.agent_notification import main
+from ceilometer.cmd.collector import main
+#from ceilometer.cmd.agent_central import main
 
 if __name__ == "__main__":
     sys.exit(main())

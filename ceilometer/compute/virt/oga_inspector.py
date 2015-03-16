@@ -53,7 +53,7 @@ class OGAInspector(object):
         self.channelListener = Listener()
         self.channelListener.settimeout(30)
         self.channelListener.start()
-        #self._prepare_socket_dir()
+        self._prepare_socket_dir()
 
     def _get_agent(self, instance_name):
 
@@ -86,7 +86,7 @@ class OGAInspector(object):
             del self.oga_dict[key]
 
     def _prepare_socket_dir(self):
-        chmod_dir_cmd = ['chmod', '-R', 'o+x', _QEMU_GA_DEVICE_DIR]
+        chmod_dir_cmd = ['chmod', '-R', 'g+rwx', _QEMU_GA_DEVICE_DIR]
         utils.execute(*chmod_dir_cmd, run_as_root=True)
 
     def _make_channel_path(self, deviceName, instance_name):
