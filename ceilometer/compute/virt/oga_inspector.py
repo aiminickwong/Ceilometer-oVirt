@@ -53,7 +53,7 @@ class OGAInspector(object):
         self.channelListener = Listener()
         self.channelListener.settimeout(30)
         self.channelListener.start()
-        self._prepare_socket_dir()
+        #self._prepare_socket_dir()
 
     def _get_agent(self, instance_name):
 
