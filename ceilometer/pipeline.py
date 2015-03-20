@@ -255,7 +255,7 @@ class Sink(object):
             transformers.append(ext.plugin(**parameter))
             LOG.info(_(
                 "Pipeline %(pipeline)s: Setup transformer instance %(name)s "
-                "with parameter %(param)s") % ({'pipeline': self,
+                "with parameter %(param)s") % ({'pipeline': self.name,
                                                 'name': transformer['name'],
                                                 'param': parameter}))
 
@@ -268,14 +268,14 @@ class Sink(object):
                 if not sample:
                     LOG.debug(_(
                         "Pipeline %(pipeline)s: Sample dropped by "
-                        "transformer %(trans)s") % ({'pipeline': self,
+                        "transformer %(trans)s") % ({'pipeline': self.name,
                                                      'trans': transformer}))
                     return
             return sample
         except Exception as err:
             LOG.warning(_("Pipeline %(pipeline)s: "
                           "Exit after error from transformer "
-                          "%(trans)s for %(smp)s") % ({'pipeline': self,
+                          "%(trans)s for %(smp)s") % ({'pipeline': self.name,
                                                        'trans': transformer,
                                                        'smp': sample}))
             LOG.exception(err)
@@ -295,7 +295,7 @@ class Sink(object):
         for sample in samples:
             LOG.debug(_(
                 "Pipeline %(pipeline)s: Transform sample "
-                "%(smp)s from %(trans)s transformer") % ({'pipeline': self,
+                "%(smp)s from %(trans)s transformer") % ({'pipeline': self.name,
                                                           'smp': sample,
                                                           'trans': start}))
             sample = self._transform_sample(start, ctxt, sample)
@@ -309,7 +309,7 @@ class Sink(object):
                 except Exception:
                     LOG.exception(_(
                         "Pipeline %(pipeline)s: Continue after error "
-                        "from publisher %(pub)s") % ({'pipeline': self,
+                        "from publisher %(pub)s") % ({'pipeline': self.name,
                                                       'pub': p}))
 
     def publish_samples(self, ctxt, samples):
@@ -328,7 +328,7 @@ class Sink(object):
             except Exception as err:
                 LOG.warning(_(
                     "Pipeline %(pipeline)s: Error flushing "
-                    "transformer %(trans)s") % ({'pipeline': self,
+                    "transformer %(trans)s") % ({'pipeline': self.name,
                                                  'trans': transformer}))
                 LOG.exception(err)
 
