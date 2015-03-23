@@ -27,6 +27,7 @@ from ceilometer.openstack.common.rpc import dispatcher as rpc_dispatcher
 from ceilometer.openstack.common.rpc import service as rpc_service
 from ceilometer.openstack.common import units
 from ceilometer import service
+from ceilometer.dispatcher import redis_database
 
 OPTS = [
     cfg.StrOpt('udp_address',
@@ -51,6 +52,9 @@ class CollectorService(service.DispatchedService, rpc_service.Service):
     """Listener for the collector service."""
 
     def start(self):
+
+        self.redis_dispatcher = redis_database.RedisDispatcher(cfg.CONF)
+
         """Bind the UDP socket and handle incoming data."""
         if cfg.CONF.collector.udp_address:
             self.tg.add_thread(self.start_udp)
@@ -77,9 +81,10 @@ class CollectorService(service.DispatchedService, rpc_service.Service):
                 LOG.warn(_("UDP: Cannot decode data sent by %s"), str(source))
             else:
                 try:
-                    LOG.debug(_("UDP: Storing %s"), str(sample))
-                    self.dispatcher_manager.map_method('record_metering_data',
-                                                       sample)
+                    LOG.debug(_("UDP: Storing %s to Redis"), str(sample))
+                    self.redis_dispatcher.record_metering_data(sample)
+                    # self.dispatcher_manager.map_method('record_metering_data',
+                    #                                    sample)
                 except Exception:
                     LOG.exception(_("UDP: Unable to store meter"))
 

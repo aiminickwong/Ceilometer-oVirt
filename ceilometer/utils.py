@@ -23,6 +23,7 @@ import copy
 import datetime
 import decimal
 import multiprocessing
+import json
 
 from ceilometer.openstack.common import timeutils
 from ceilometer.openstack.common import units
@@ -203,3 +204,13 @@ def uniq(dupes, attrs):
             deduped.append(d)
             keys.append(key(d))
     return deduped
+
+
+
+class SetJSONEncoder(json.JSONEncoder):
+    '''encode python sets to json string'''
+
+    def default(self, obj):
+        if isinstance(obj, set):
+            return list(obj)
+        return json.JSONEncoder.default(self, obj)
