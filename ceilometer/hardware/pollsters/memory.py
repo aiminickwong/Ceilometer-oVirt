@@ -52,3 +52,27 @@ class MemoryUsedPollster(_Base):
                                           unit='B',
                                           volume=c_data.used,
                                           )
+
+
+class MemoryBufferPollster(_Base):
+
+    @staticmethod
+    def generate_one_sample(host, c_data):
+        return util.make_sample_from_host(host,
+                                          name='memory.buffer',
+                                          type=sample.TYPE_GAUGE,
+                                          unit='B',
+                                          volume=c_data.buffer,
+                                          )
+
+
+class MemoryCachedPollster(_Base):
+
+    @staticmethod
+    def generate_one_sample(host, c_data):
+        return util.make_sample_from_host(host,
+                                          name='memory.cached',
+                                          type=sample.TYPE_GAUGE,
+                                          unit='B',
+                                          volume=c_data.cached,
+                                          )

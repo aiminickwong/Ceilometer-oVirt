@@ -58,7 +58,9 @@ class SNMPInspector(base.Inspector):
     _cpu_15_min_load_oid = "1.3.6.1.4.1.2021.10.1.3.3"
     #Memory OIDs
     _memory_total_oid = "1.3.6.1.4.1.2021.4.5.0"
-    _memory_used_oid = "1.3.6.1.4.1.2021.4.6.0"
+    _memory_avail_real_oid = "1.3.6.1.4.1.2021.4.6.0"
+    _memory_buffer_oid = "1.3.6.1.4.1.2021.4.14.0"
+    _memory_cached_oid = "1.3.6.1.4.1.2021.4.15.0"
     #Disk OIDs
     _disk_index_oid = "1.3.6.1.4.1.2021.9.1.1"
     _disk_path_oid = "1.3.6.1.4.1.2021.9.1.2"
@@ -126,9 +128,13 @@ class SNMPInspector(base.Inspector):
         #get total memory
         total = self._get_value_from_oid(self._memory_total_oid, host)
         #get used memory
-        used = self._get_value_from_oid(self._memory_used_oid, host)
+        used = int(total) - int(self._get_value_from_oid
+                                (self._memory_avail_real_oid, host))
+        buffer = self._get_value_from_oid(self._memory_buffer_oid, host)
+        cached = self._get_value_from_oid(self._memory_cached_oid, host)
 
-        yield base.MemoryStats(total=int(total), used=int(used))
+        yield base.MemoryStats(total=int(total), used=int(used),
+                               buffer=int(buffer), cached=int(cached))
 
     def inspect_disk(self, host):
         disks = self._walk_oid(self._disk_index_oid, host)

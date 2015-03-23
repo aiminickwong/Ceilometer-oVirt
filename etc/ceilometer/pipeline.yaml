@@ -28,6 +28,8 @@ sources:
       meters:
           - "hardware.memory.total"
           - "hardware.memory.used"
+          - "hardware.memory.buffer"
+          - "hardware.memory.cached"
           - "hardware.cpu.load.1min"
           - "hardware.cpu.load.5min"
           - "hardware.cpu.load.15min"

@@ -38,7 +38,8 @@ CPUStats = collections.namedtuple(
 # total: Total Memory (bytes)
 # used: Used Memory (bytes)
 #
-MemoryStats = collections.namedtuple('MemoryStats', ['total', 'used'])
+MemoryStats = collections.namedtuple('MemoryStats', ['total', 'used',
+                                                     'buffer', 'cached'])
 
 # Named tuple representing disks.
 #
