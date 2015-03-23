@@ -35,6 +35,7 @@ sources:
           - "hardware.cpu.load.15min"
           - "hardware.disk.size.total"
           - "hardware.disk.size.used"
+          - "hardware.system_stats.cpu.idle"
       sinks:
           - meter_sink_fast
     - name: disk_source

@@ -64,3 +64,15 @@ class CPULoad15MinPollster(_Base):
                                           unit='process',
                                           volume=c_data.cpu_15_min,
                                           )
+
+
+class SystemCpuIdlePollster(_Base):
+
+    @staticmethod
+    def generate_one_sample(host, c_data):
+        return util.make_sample_from_host(host,
+                                          name='system_stats.cpu.idle',
+                                          type=sample.TYPE_GAUGE,
+                                          unit='%',
+                                          volume=c_data.cpu_idle,
+                                          )

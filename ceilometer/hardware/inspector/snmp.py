@@ -76,6 +76,8 @@ class SNMPInspector(base.Inspector):
     _interface_received_oid = "1.3.6.1.2.1.2.2.1.10"
     _interface_transmitted_oid = "1.3.6.1.2.1.2.2.1.16"
     _interface_error_oid = "1.3.6.1.2.1.2.2.1.20"
+    # System stats
+    _system_stats_cpu_idle_oid = "1.3.6.1.4.1.2021.11.11.0"
     #Default port and security name
     _port = 161
     _security_name = 'public'
@@ -120,9 +122,14 @@ class SNMPInspector(base.Inspector):
         cpu_15_min_load = \
             str(self._get_value_from_oid(self._cpu_15_min_load_oid, host))
 
+        cpu_idle = \
+            str(self._get_value_from_oid(self._system_stats_cpu_idle_oid,
+                                         host))
+
         yield base.CPUStats(cpu_1_min=float(cpu_1_min_load),
                             cpu_5_min=float(cpu_5_min_load),
-                            cpu_15_min=float(cpu_15_min_load))
+                            cpu_15_min=float(cpu_15_min_load),
+                            cpu_idle=float(cpu_idle))
 
     def inspect_memory(self, host):
         #get total memory

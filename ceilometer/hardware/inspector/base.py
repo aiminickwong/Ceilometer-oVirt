@@ -31,7 +31,7 @@ import six
 #
 CPUStats = collections.namedtuple(
     'CPUStats',
-    ['cpu_1_min', 'cpu_5_min', 'cpu_15_min'])
+    ['cpu_1_min', 'cpu_5_min', 'cpu_15_min', 'cpu_idle'])
 
 # Named tuple representing RAM statistics.
 #
