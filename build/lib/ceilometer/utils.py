@@ -26,6 +26,7 @@ import decimal
 import hashlib
 import multiprocessing
 import struct
+import json
 
 from ceilometer.openstack.common import processutils
 from oslo.config import cfg
@@ -246,3 +247,12 @@ class HashRing(object):
             return None
         pos = self._get_position_on_ring(key)
         return self._ring[self._sorted_keys[pos]]
+
+
+class SetJSONEncoder(json.JSONEncoder):
+    '''encode python sets to json string'''
+
+    def default(self, obj):
+        if isinstance(obj, set):
+            return list(obj)
+        return json.JSONEncoder.default(self, obj)

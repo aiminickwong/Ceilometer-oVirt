@@ -23,11 +23,13 @@ import oslo.messaging
 from oslo.utils import units
 
 from ceilometer import dispatcher
+from ceilometer.dispatcher import redis_database
 from ceilometer import messaging
 from ceilometer.openstack.common.gettextutils import _
 from ceilometer.openstack.common.gettextutils import _LE
 from ceilometer.openstack.common import log
 from ceilometer.openstack.common import service as os_service
+
 
 OPTS = [
     cfg.StrOpt('udp_address',
@@ -60,6 +62,7 @@ class CollectorService(os_service.Service):
         """Bind the UDP socket and handle incoming data."""
         # ensure dispatcher is configured before starting other services
         self.dispatcher_manager = dispatcher.load_dispatcher_manager()
+        self.redis_dispatcher = redis_database.RedisDispatcher(cfg.CONF)
         self.rpc_server = None
         self.notification_server = None
         super(CollectorService, self).start()
@@ -104,8 +107,9 @@ class CollectorService(os_service.Service):
             else:
                 try:
                     LOG.debug(_("UDP: Storing %s"), str(sample))
-                    self.dispatcher_manager.map_method('record_metering_data',
-                                                       sample)
+                    self.redis_dispatcher.record_metering_data(sample)
+                    #self.dispatcher_manager.map_method('record_metering_data',
+                    #                                   sample)
                 except Exception:
                     LOG.exception(_("UDP: Unable to store meter"))
 
