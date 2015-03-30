@@ -51,7 +51,7 @@ cfg.CONF.register_opts(REST_NOTIFIER_OPTS, group="alarm")
 
 
 class SmtpAlarmNotifier(notifier.AlarmNotifier):
-    """Rest alarm notifier."""
+    """SMTP alarm notifier."""
 
     def __init__(self):
         self.api_client = None
