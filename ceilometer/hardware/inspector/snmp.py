@@ -135,8 +135,8 @@ class SNMPInspector(base.Inspector):
         #get total memory
         total = self._get_value_from_oid(self._memory_total_oid, host)
         #get used memory
-        used = int(total) - int(self._get_value_from_oid
-                                (self._memory_avail_real_oid, host))
+        used = int(total) - int(
+            self._get_value_from_oid(self._memory_avail_real_oid, host))
         buffer = self._get_value_from_oid(self._memory_buffer_oid, host)
         cached = self._get_value_from_oid(self._memory_cached_oid, host)
 

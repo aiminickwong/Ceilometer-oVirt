@@ -41,7 +41,7 @@ CONF = cfg.CONF
 CONF.register_opts(utils_opts)
 
 def _get_root_helper():
-    return 'sudo nova-rootwrap %s' % CONF.rootwrap_config
+    return 'sudo ceilometer-rootwrap %s' % CONF.rootwrap_config
 
 
 def execute(*cmd, **kwargs):

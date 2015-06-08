@@ -14,13 +14,12 @@
 # WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
 # License for the specific language governing permissions and limitations
 # under the License.
-from oslo.utils import timeutils
+#from oslo.utils import timeutils
 from oslo.config import cfg
 
 from ceilometer import dispatcher
 from ceilometer.openstack.common.gettextutils import _
 from ceilometer.openstack.common import log
-from ceilometer.publisher import utils as publisher_utils
 from ceilometer.utils import SetJSONEncoder
 
 import json
@@ -85,9 +84,9 @@ class RedisDispatcher(dispatcher.Base):
                 # Convert the timestamp to a datetime instance.
                 # Storage engines are responsible for converting
                 # that value to something they can store.
-                if meter.get('timestamp'):
-                    ts = timeutils.parse_isotime(meter['timestamp'])
-                    #meter['timestamp'] = timeutils.normalize_time(ts)
+                #if meter.get('timestamp'):
+                    # ts = timeutils.parse_isotime(meter['timestamp'])
+                    # meter['timestamp'] = timeutils.normalize_time(ts)
 
                 if meter.get('resource_metadata'):
                     resource_metadata = meter['resource_metadata']

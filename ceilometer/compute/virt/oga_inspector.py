@@ -64,8 +64,8 @@ class OGAInspector(object):
                                                   instance_name)
         if os.path.exists(guestSocketFile):
             guest_agent = GuestAgent(guestSocketFile, self.channelListener)
-            guest_agent.connect()
             self.oga_dict[instance_name] = guest_agent
+            guest_agent.connect()
             return guest_agent
         else:
             LOG.error("Instance %s socket file %s does not exist!" %
